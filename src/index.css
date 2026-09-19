@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #070708;
+  --color-paper-2: #0e0e10;
+  --color-paper-3: #141416;
+  --color-surface: #111113;
+  --color-fg: #f3f3f1;
+  --color-muted: #9a9a96;
+  --color-accent: #fb8c28;
+  --color-accent-soft: color-mix(in srgb, #fb8c28 18%, transparent);
+  --color-line: color-mix(in srgb, #f3f3f1 10%, transparent);
+  --font-brand: "Bungee", cursive;
+  --font-body: "Outfit", sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-dvh bg-paper text-fg antialiased;
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, #fb8c28 40%, transparent);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .font-brand {
+    font-family: var(--font-brand);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hero-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, #fb8c28 22%, transparent), transparent 70%);
+  }
+
+  .slash-bg {
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      color-mix(in srgb, #fb8c28 12%, transparent) 42%,
+      color-mix(in srgb, #fb8c28 12%, transparent) 44%,
+      transparent 44%
+    );
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+}
